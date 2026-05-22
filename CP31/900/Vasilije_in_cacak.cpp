@@ -1,4 +1,4 @@
-https://codeforces.com/problemset/problem/1878/C
+https : // codeforces.com/problemset/problem/1878/C
 /*Vasilije in Cacak
 Aca and Milovan, two fellow competitive programmers, decided to give Vasilije a problem to test his skills.
 Vasilije is given three positive integers: n, k, and x, and he has to determine if he can choose k distinct integers between 1 and n, such that their sum is equal to x.
@@ -48,7 +48,7 @@ In the first test case n=5, k=3, x=10, so we can choose the numbers: 2, 3, 5, wh
 In the second test case n=5, k=3, x=3, there is no three numbers which satisfies the condition, so the answer is "NO". It can be shown that there are no three numbers whose sum is 3.*/
 
 #include <bits/stdc++.h>
-using namespace std;
+        using namespace std;
 
 int main()
 {
@@ -58,7 +58,7 @@ int main()
     {
         long long n, k, x;
         cin >> n >> k >> x;
-        long long mini = (k * (k + 1)) / 2; // starting k numbers ka sum
+        long long mini = (k * (k + 1)) / 2;         // starting k numbers ka sum
         long long maxi = (k * (2 * n - k + 1)) / 2; // last k numbers ka sum
         if (x >= mini && x <= maxi)
             cout << "YES\n";
