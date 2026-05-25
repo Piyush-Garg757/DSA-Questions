@@ -81,3 +81,5 @@ int main() {
     }
 }
 // TC - O(n)  SC - O(1)
+
+// Intution - even can be made by even + even or odd + odd so only even sum is breakable in same parity subsets   while odd is always made of even + odd so it is not breakable
