@@ -1,4 +1,4 @@
-h7ttps://codeforces.com/problemset/problem/1783/A
+https://codeforces.com/problemset/problem/1783/A
 /*Make it Beautiful
 An array a is called ugly if it contains at least one element which is equal to the sum of all elements before it.
 If the array is not ugly, it is beautiful.
