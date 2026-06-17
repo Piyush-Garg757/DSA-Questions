@@ -33,3 +33,24 @@ public:
     }
 };
 // TC - O(logn)  SC - O(1)
+
+class Solution
+{
+public:
+    int maxProduct(int n)
+    {
+        // code here
+        if (n == 2)
+            return 1;
+        if (n == 3)
+            return 2;
+        long long ans = 1;
+        while (n > 4)
+        {
+            ans *= 3;
+            n -= 3;
+        }
+        return ans * n;
+    }
+};
+// TC - O(n)  SC - O(1)
