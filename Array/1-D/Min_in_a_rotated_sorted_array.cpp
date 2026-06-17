@@ -1,5 +1,33 @@
 /*Rotated sorted array mein min nikalna hai    Unique elements*/
 
+// Find pivot index and return pivot idx -1
+class Solution
+{
+public:
+    int findMin(vector<int> &a)
+    {
+        int pivot = -1;
+        int n = a.size();
+        int low = 0, high = n - 1;
+        while (low <= high)
+        {
+            int mid = low + (high - low) / 2;
+            if (a[mid] >= a[0])
+            {
+                pivot = mid;
+                low = mid + 1;
+            }
+            else
+                high = mid - 1;
+        }
+        if (pivot == n - 1)
+            return a[0];
+        return a[pivot + 1];
+    }
+};
+// TC - O(logn)  SC - O(1)
+
+// Another approach
 // Visualise using peak diagram
 class Solution
 {
@@ -133,6 +161,5 @@ public:
     }
 };
 // TC - O(logn)  SC - O(1)
-
 
 // Pucha ho how many times the array has been rotated to uska answer min ka idx ata hai
