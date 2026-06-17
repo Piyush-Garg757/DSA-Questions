@@ -77,6 +77,8 @@
     4
 
 
+
+
  Representation of a binary Tree in cpp
 
                 5
@@ -98,3 +100,12 @@
 N   N [L|1|R] N
         /   \
        N     N  where N =  null
+
+
+ Traversal techniques:
+ 1. DFS - Depth first search . It has further 3 types :
+          1. Inorder Traversal (Left Root Right)
+          2. Preorder Traversal (Root Left Right)
+          3. Postorder Traversal (Left Right Root)
+
+ 2. BFS - Breadth first search - level by level print karega
