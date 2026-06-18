@@ -73,6 +73,66 @@ void bfs(node *root)
     }
     // TC - O(n)  SC - O(n)
 }
+void iterative_preorder(node *root)
+{
+    if (root == nullptr)
+        return;
+    stack<node *> st;
+    st.push(root);
+    while (!st.empty())
+    {
+        node *a = st.top();
+        st.pop();
+        cout << a->data << " ";
+        if (a->right)
+            st.push(a->right);
+        if (a->left)
+            st.push(a->left);
+    }
+    // TC - O(n)  SC - O(n)
+}
+void iterative_inorder(node *root)
+{
+    if (root == nullptr)
+        return;
+    stack<node *> st;
+    while (true)
+    {
+        if (root != nullptr)
+        {
+            st.push(root);
+            root = root->left;
+        }
+        else
+        {
+            if (st.empty())
+                break;
+            root = st.top();
+            st.pop();
+            cout << root->data << " ";
+            root = root->right;
+        }
+    }
+    // TC - O(n)  SC - O(n)
+}
+void iterative_postorder(node *root)
+{
+    if (root == nullptr)
+        return;
+    stack<node *> st;
+    st.push(root);
+    while (!st.empty())
+    {
+        node *a = st.top();
+        st.pop();
+        if (a->right)
+            st.push(a->right);
+        if (a->left)
+            st.push(a->left);
+        cout << a->data << " ";
+    }
+    // TC - O(n)  SC - O(n)
+}
 int main()
 {
     node *root = new node(2);
@@ -84,5 +144,11 @@ int main()
     inorder(root);
     cout << "\n";
     bfs(root); // this is also called level order traversal;
+    iterative_preorder(root);
+    cout << "\n";
+    iterative_inorder(root);
+    cout << "\n";
+    iterative_postorder(root);
+    cout << "\n";
     return 0;
 }
