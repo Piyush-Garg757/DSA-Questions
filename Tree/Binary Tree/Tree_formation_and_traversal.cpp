@@ -139,6 +139,39 @@ void iterative_postorder_using_2_stack(node *root)
     }
     // TC - O(n)  SC - O(n)
 }
+void iterative_postorder_using_1_stack(node *root)
+{
+    if (root == nullptr)
+        return;
+    stack<node *> st;
+    while (root != nullptr || !st.empty())
+    {
+        if (root != nullptr)
+        {
+            st.push(root);
+            root = root->left;
+        }
+        else
+        {
+            node *temp = st.top()->right;
+            if (temp == nullptr)
+            {
+                temp = st.top();
+                st.pop();
+                cout << temp->data << " ";
+                while (!st.empty() && temp == st.top()->right)
+                {
+                    temp = st.top();
+                    st.pop();
+                    cout << temp->data << " ";
+                }
+            }
+            else
+                root = temp;
+        }
+    }
+    // TC - O(n)  SC - O(n)
+}
 int main()
 {
     node *root = new node(2);
@@ -157,6 +190,8 @@ int main()
     iterative_inorder(root);
     cout << "\n";
     iterative_postorder_using_2_stack(root);
+    cout << "\n";
+    iterative_postorder_using_1_stack(root);
     cout << "\n";
     return 0;
 }
