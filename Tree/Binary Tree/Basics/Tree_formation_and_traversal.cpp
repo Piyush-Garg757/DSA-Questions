@@ -222,6 +222,7 @@ int main()
     root->left = new node(3);
     root->right = new node(4);
     root->left->right = new node(5);
+    root->left->left = new node(6);
     preorder(root);
     cout << "\n";
     inorder(root);
@@ -237,6 +238,6 @@ int main()
     cout << "\n";
     iterative_postorder_using_1_stack(root);
     cout << "\n";
-    all_traversals(root);
+    all_traversals(root); // in pre post all in 1 traversal using 1 stack
     return 0;
 }
