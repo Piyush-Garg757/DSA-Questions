@@ -76,3 +76,65 @@ public:
     }
 };
 // TC - O(n)  SC - O(n)
+
+/*For Maximum Depth of Binary Tree:
+
+1. Recursive DFS
+1 + max(leftDepth, rightDepth)
+Worst Case Tree
+
+A completely skewed tree:
+
+1
+ \
+  2
+   \
+    3
+     \
+      4
+Complexity
+Time: O(n)
+Space: O(n)
+
+Why?
+
+Recursion stack contains all n nodes at once.
+Best/Balanced Case
+        1
+      /   \
+     2     3
+    / \   / \
+   4  5  6  7
+Space: O(log n) (height of balanced tree)
+2. BFS (Level Order)
+Worst Case Tree
+
+A perfect/complete binary tree:
+
+          1
+       /     \
+      2       3
+    /  \     /  \
+   4    5   6    7
+  / \  / \ / \  / \
+ ...
+Complexity
+Time: O(n)
+Space: O(n)
+
+Why?
+
+The queue may contain an entire level.
+Last level has about n/2 nodes.
+Best Case (Skewed Tree)
+1
+ \
+  2
+   \
+    3
+Queue contains at most 1 node.
+Space: O(1) (or O(h)=O(1) per level)
+Interview Summary
+Approach	Worst-case Time	Worst-case Space	Worst Case Tree
+DFS (Recursive)	O(n)	O(n)	Skewed tree
+BFS (Queue)	O(n)	O(n)	Perfect/Complete tree*/
