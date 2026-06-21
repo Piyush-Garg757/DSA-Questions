@@ -45,7 +45,6 @@ public:
 };
 // TC - O(n)  SC - O(n)
 
-
 /*Symmetric Tree
 
 Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
@@ -94,4 +93,41 @@ public:
 };
 // TC - O(n)  SC - O(n)
 
-// isi mein agar iterative approach puchi ho same tree ke liye bfs ya dfs check kar lo dono trees ka 
+// isi mein agar iterative approach puchi ho same tree ke liye bfs ya dfs check kar lo dono trees ka
+class Solution
+{
+public:
+    bool isSameTree(TreeNode *p, TreeNode *q)
+    {
+        queue<TreeNode *> qu;
+
+        qu.push(p);
+        qu.push(q);
+
+        while (!qu.empty())
+        {
+            TreeNode *first = qu.front();
+            qu.pop();
+
+            TreeNode *second = qu.front();
+            qu.pop();
+
+            if (!first && !second)
+                continue;
+
+            if (!first || !second)
+                return false;
+
+            if (first->val != second->val)
+                return false;
+
+            qu.push(first->left);
+            qu.push(second->left);
+
+            qu.push(first->right);
+            qu.push(second->right);
+        }
+
+        return true;
+    }
+};
