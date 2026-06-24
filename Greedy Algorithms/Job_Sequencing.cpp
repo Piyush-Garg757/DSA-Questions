@@ -21,7 +21,7 @@ struct Job
 };
 */
 
-// Optimal approach
+// Optimal approach - profit ke basis pe sort kar liya aur deadline ke ekdum last day karne ka try kar rahe hain   agar dono ek hi deadline pe aa rahe hain ot us se ek din oehle karne ka ya jab bhi last -1 aa raha hai uspe de rahe hain
 class Solution
 {
 public:
