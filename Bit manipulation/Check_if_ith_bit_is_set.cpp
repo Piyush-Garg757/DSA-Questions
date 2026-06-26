@@ -13,3 +13,5 @@ bool isSet(int n, int i)
 }
 
 // TC - O(1)  SC - O(1)
+
+// inmein 0 se count shuru ho raha bit ka lsb ko 0th bit mana hai
