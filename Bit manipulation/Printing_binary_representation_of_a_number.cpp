@@ -31,6 +31,7 @@ int main()
     reverse(ans.begin(), ans.end());
     cout << ans;
 }
+// TC - O(logn)  SC - O(logn)
 
 Output : 1101
 
