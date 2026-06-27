@@ -157,4 +157,33 @@ return a[i-1];
 returns
 4  and if the number not found then it will surely be the last one as if it was in the array earlier it must have been found*/
 
-// Most optimal sol
+// Most optimal sol - Is approach ka pehle se na pata ho to ise socha nahi ja sakta hai khud se
+class Solution
+{
+public:
+    int singleNumber(vector<int> &a)
+    {
+        int ones = 0, twos = 0;
+        for (int i = 0; i < a.size(); i++)
+        {
+            ones = (a[i] ^ ones) & (~twos);
+            twos = (a[i] ^ twos) & (~ones);
+        }
+        return ones;
+    }
+};
+// TC - O(n)  SC - O(1)
+/*Intution - Hum do buckets (ones aur twos) maintain karte hain. Dhyan rahe ye buckets numbers nahi, bits store karti hain.
+
+ones un bits ko store karta hai jo abhi tak 1 mod 3 baar aaye hain.
+twos un bits ko store karta hai jo 2 mod 3 baar aaye hain.
+
+Jab koi naya number aata hai, uske bits pehle XOR ki help se respective bucket mein toggle hote hain. Agar koi bit doosri bucket mein already present hai, to & ~otherBucket ki help se usse hata diya jata hai taaki ek bit ek time par sirf ek hi bucket mein rahe.
+
+Is process se har bit ka state automatically
+
+0 → ones → twos → 0
+
+follow karta hai. Isliye jo bits 3 baar aati hain wo remove ho jaati hain, aur end mein ones mein sirf unique number ki bits bachti hain.*/
+
+// Basically ye yaad hi rakhna hai
