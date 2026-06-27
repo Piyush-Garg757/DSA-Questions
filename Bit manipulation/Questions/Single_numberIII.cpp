@@ -24,7 +24,7 @@ public:
         long long xr = 0, n = a.size();
         for (int i = 0; i < n; i++)
             xr ^= a[i];
-        long long mask = xr & (-xr);
+        long long mask = xr & (-xr); // extracting rightmost set bit kyuki vo ek 0 aur 1 se aai hogi to vo numbersko differentiate karne ke liye use ho sakti hai
         int xr1 = 0, xr2 = 0;
         for (int i = 0; i < n; i++)
         {
