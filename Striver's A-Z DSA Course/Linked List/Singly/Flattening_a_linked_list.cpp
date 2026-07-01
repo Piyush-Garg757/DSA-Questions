@@ -28,6 +28,9 @@ Bottom pointer of 8 is pointing to 30 and so on.
 So, after flattening the linked list the sorted list will be
 5 -> 7 -> 8 -> 10 -> 19 -> 22 -> 28 -> 30 -> 50.*/
 
+// Brute force to vahi ki traverse karte hue array mein push kar do fir array sort karo fir us se ll banao 
+
+// Optimal sol - 2 2 linked list lo aur unhi ke nodes ko use karke merged banate hue chalo
 /*
 class Node {
     public:
@@ -82,8 +85,16 @@ public:
         // code here
         if (!head || !head->next)
             return head;
-        Node *mergedhead = flatten(head->next);
-        return merge(mergedhead, head);
+        Node *temp = head;
+        Node *merged = nullptr;
+        while (temp)
+        {
+            Node *nxt = temp->next;
+            merged = merge(merged, temp);
+            temp = nxt;
+        }
+        return merged;
     }
 };
-// TC - O(n*m)  SC - O(n)
+
+// TC - O(n*m)  SC - O(1)
