@@ -81,3 +81,5 @@ public:
     }
 };
 // TC - O(n)  SC - O(n)
+
+// ismein ye condition thoda dhyaan rakhne vali hai while (!st.empty() && st.top() != '(' && ((priority(s[i]) < priority(st.top())) || (priority(s[i]) == priority(st.top()) && s[i] != '^')))
