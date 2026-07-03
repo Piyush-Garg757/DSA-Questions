@@ -10,7 +10,7 @@ Example 2:
 Input: head = [5], left = 1, right = 1
 Output: [5]*/
 
-// Optimal but it is done in two passes
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
