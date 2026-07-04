@@ -12,7 +12,6 @@ int main()
         string s;
         cin >> s;
         int ab = 0, ba = 0;
-
         for (int i = 0; i + 1 < s.length(); i++)
         {
             if (s[i] == 'a' && s[i + 1] == 'b')
@@ -22,29 +21,33 @@ int main()
                 ba++;
         }
         if (ab == ba)
-        {
             cout << s << "\n";
-        }
-        else if (ba > ab)
-        {
-            for (int i = 0; i < s.length() - 1; i++)
-            {
-                if (s[i] == 'b' && s[i + 1] == 'a' && ba > ab && (i == 0 || s[i - 1] != 'a'))
-                {
-                    s[i + 1] = 'b';
-                    ba--;
-                }
-            }
-            cout << s << "\n";
-        }
         else
         {
-            for (int i = 0; i < s.length() - 1; i++)
+            if (ab > ba)
             {
-                if (s[i] == 'a' && s[i + 1] == 'b' && ab > ba && (i == 0 || s[i - 1] != 'b'))
+                for (int i = 0; i < s.length() - 1; i++)
                 {
-                    s[i + 1] = 'a';
-                    ab--;
+                    if (s[i] == 'a' && s[i + 1] == 'b' && (i == 0 || s[i - 1] != 'b'))
+                    {
+                        s[i] = 'b';
+                        ab--;
+                        if (ab == ba)
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i + 1 < s.length(); i++)
+                {
+                    if (s[i] == 'b' && s[i + 1] == 'a' && (i == 0 || s[i - 1] != 'a'))
+                    {
+                        s[i] = 'a';
+                        ba--;
+                        if (ab == ba)
+                            break;
+                    }
                 }
             }
             cout << s << "\n";
