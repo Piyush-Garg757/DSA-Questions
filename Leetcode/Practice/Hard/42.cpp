@@ -39,4 +39,28 @@ public:
         return water;
     }
 };
-// TC - O(n)  SC - O(n) 
+// TC - O(n)  SC - O(n)
+
+// Optimal approach - basically jo pehle separate arrays se kar rahe the vo ab 2 pointer se karenge
+class Solution
+{
+public:
+    int trap(vector<int> &a)
+    {
+        int n = a.size();
+        int l = 0, r = n - 1, lmax = INT_MIN, rmax = INT_MIN, ans = 0;
+        while (l < r)
+        {
+            lmax = max(lmax, a[l]);
+            rmax = max(rmax, a[r]);
+            if (lmax < rmax)
+            {
+                ans += lmax - a[l++];
+            }
+            else
+                ans += rmax - a[r--];
+        }
+        return ans;
+    }
+};
+// TC - O(n)  SC - O(1)
