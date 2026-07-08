@@ -117,3 +117,4 @@ public:
  * obj->put(key,value);
  */
 // TC - O(1)  SC - O(n)
+// Intuiton simple jab bhi kisi node pe kuch operation karo use jaha bhi vo hai vahan se delete karke head ke aage laga do kyuki vo most recently used hai aur jab lear recently used hatana ho to vo obviously tail se pehle vala hoga to use delete kar do   iske liye humne unordered mao liya hai jo key aur node store kare aur doubly linked list li hai
