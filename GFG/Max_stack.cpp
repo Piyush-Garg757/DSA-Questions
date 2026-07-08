@@ -112,4 +112,4 @@ newval pushed to stack < newmin
 
 vese hi yahan newmax> prevmax
 
-aur finally new value oushed to stack > newmax  usi se sochke implement kiya*/
+aur finally new value pushed to stack > newmax  usi se sochke implement kiya*/
