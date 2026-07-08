@@ -56,4 +56,4 @@ public:
     }
 };
 // TC - O(n*2^n)  SC - O(n)
-// Learnings - for loop apne aap hi not take handle kar leta hai to agar for loop se kar rahe ho to not take vala call lagana nahi hota            duplicates na aaye vo hatane ke liye ek hi line add karni kaafi hoti hai aur ismein vo add karni thi isiliye for loop se kaara 
+// Learnings - for loop apne aap hi not take handle kar leta hai to agar for loop se kar rahe ho to not take vala call lagana nahi hota            duplicates na aaye vo hatane ke liye ek hi line add karni kaafi hoti hai aur ismein vo add karni thi isiliye for loop se kara aur isiliye hi sort bhi kara ki same vale elements aage peeche aa jaye
