@@ -52,3 +52,30 @@ public:
 };
 // TC - O(k*2^n)  SC - O(n)
 // Simple intution - pick not pick vala hi hai just same element ko multiple times pick kar sake isiliye usmein idx+1 nahi kiya aur agle mein kiya hai kyuki usmein ise skip kar diya
+
+// Ek aur gyaan ki baat - yahi agar ye puch lete ki total kitnr banenge to
+class Solution
+{
+public:
+    int find(vector<int> &a, int idx, int n, vector<int> &v, int curr_sum,
+             int k)
+    {
+        if (curr_sum == k)
+        {
+            return 1;
+        }
+        if (curr_sum > k || idx == n)
+            return 0;
+        v.push_back(a[idx]);
+        int l = find(a, idx, n, v, curr_sum + a[idx], k);
+        v.pop_back();
+        int r = find(a, idx + 1, n, v, curr_sum, k);
+        return l + r;
+    }
+    int combinationSum4(vector<int> &a, int k)
+    {
+        int n = a.size();
+        vector<int> v;
+        return find(a, 0, n, v, 0, k);
+    }
+};
