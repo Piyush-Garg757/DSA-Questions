@@ -53,7 +53,7 @@ public:
                 }
             }
         }
-        return true; // agar koi bhi khali nahi bacha to return 
+        return true; // agar koi bhi khali nahi bacha to return
     }
     void solveSudoku(vector<vector<char>> &board)
     {
@@ -62,3 +62,31 @@ public:
     }
 };
 // TC - O(9^e)  SC - O(e) where e is the number of empty cells
+
+// Valid sudoku
+class Solution
+{
+public:
+    bool isValidSudoku(vector<vector<char>> &board)
+    {
+        bool rows[9][9] = {false};
+        bool cols[9][9] = {false};
+        bool boxes[9][9] = {false};
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (board[i][j] != '.')
+                {
+                    int num = board[i][j] - '1';
+                    int boxIndex = (i / 3) * 3 + (j / 3); // 9 boxer - har bo =x ke liye 1 - 9 tak k atrack rakhna hai to boxes ko arrange karne ke liye ye tareeka lagaya  box 1 2 3 upar neeche hi ayenge yani 3 ki spce le lenge voboc ko ek row mein aa rahe the isiliye i/3*3  aur j/3 isilye ki pata lage kaunsa box hai 1 2 ya 3 ek parrticular row ka 
+                    if (rows[i][num] || cols[j][num] || boxes[boxIndex][num])
+                        return false;
+                    rows[i][num] = cols[j][num] = boxes[boxIndex][num] = true;
+                }
+            }
+        }
+        return true;
+    }
+};
+// ye bhi bohot badhiya sol hai
