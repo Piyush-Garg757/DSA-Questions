@@ -174,3 +174,200 @@ public:
     }
 };
 // TC - O(n!)  SC - O(n^2)
+/*1. leftRow[]
+Suppose
+0 1 2 3
+---------
+. . . .
+. . . .
+. . . .
+. . . .
+Hum column-wise queens place kar rahe hain.
+Suppose queen rakh di
+Q . . .
+. . . .
+. . . .
+. . . .
+Position
+(row,col)
+(0,0)
+Ab
+row 0
+me aur queen nahi aa sakti.
+To bas
+leftRow[0]=1;
+kar do.
+Ab jab bhi kisi row me queen rakhni hogi
+if(leftRow[row]==0)
+matlab row khali hai.
+Example
+Row
+0  <-- occupied
+1
+2
+3
+Array
+leftRow
+[1 0 0 0]
+Bas.
+Row check
+O(1)
+
+2. Lower Diagonal
+Ye sabse important hai.
+Board
+0,0   0,1   0,2   0,3
+1,0   1,1   1,2   1,3
+2,0   2,1   2,2   2,3
+3,0   3,1   3,2   3,3
+Ab har cell ke liye
+row+col
+nikalo.
+0 1 2 3
+1 2 3 4
+2 3 4 5
+3 4 5 6
+Observe karo.
+Diagonal
+(0,2)
+(1,1)
+(2,0)
+Sabka
+row+col
+2
+Same.
+Dusra diagonal
+(0,3)
+(1,2)
+(2,1)
+(3,0)
+Sabka
+3
+Same.
+Matlab
+Har lower diagonal ka unique ID hai
+row+col
+Isi liye
+lowerDiagonal[row+col]
+Example
+Queen
+(2,1)
+row+col
+3
+To
+lowerDiagonal[3]=1;
+Ab jis bhi cell ka
+row+col==3
+hoga
+wo unsafe hai.
+
+3. Upper Diagonal
+Ab doosri direction.
+Board
+0,0 0,1 0,2 0,3
+1,0 1,1 1,2 1,3
+2,0 2,1 2,2 2,3
+3,0 3,1 3,2 3,3
+Ab
+col-row
+nikalo.
+0 1 2 3
+-1 0 1 2
+-2 -1 0 1
+-3 -2 -1 0
+Observe
+(0,0)
+(1,1)
+(2,2)
+(3,3)
+Sabka
+col-row
+0
+Same.
+Dusra
+(0,2)
+(1,3)
+Sabka
+2
+Same.
+Problem
+Negative values aa rahi hain.
+-3
+-2
+-1
+Array me negative index nahi hota.
+To shift kar dete hain.
+Maximum negative
+-(n-1)
+Minimum positive
++(n-1)
+Range
+-(n-1)
+...
+0
+...
++(n-1)
+Total values
+2*n-1
+Isliye
+upperDiagonal[2*n-1]
+banate hain.
+Index banane ke liye
+col-row
+me
+n-1
+add kar dete hain.
+Formula
+n-1+col-row
+Example
+n=4
+Queen
+(3,1)
+col-row
+1-3=-2
+Shift
+3-2=1
+Index
+upperDiagonal[1]
+
+Array sizes
+Row
+Need
+0
+1
+2
+...
+n-1
+So
+vector<int> leftRow(n);
+Lower diagonal
+Possible values
+0
+1
+...
+2n-2
+Count
+2n-1
+Hence
+vector<int> lowerDiagonal(2*n-1);
+Upper diagonal
+Possible values after shifting
+0
+1
+...
+2n-2
+Again
+2n-1
+Hence
+vector<int> upperDiagonal(2*n-1);
+
+Placement
+Queen at
+(row,col)
+leftRow[row]=1;
+lowerDiagonal[row+col]=1;
+upperDiagonal[n-1+col-row]=1;
+Removing (Backtracking)
+leftRow[row]=0;
+lowerDiagonal[row+col]=0;
+upperDiagonal[n-1+col-row]=0;*/
