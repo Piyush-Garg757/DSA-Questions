@@ -128,3 +128,49 @@ public:
     }
 };
 // TC - O(n*n!)  SC - O(n^2)
+
+// Most optimal sol
+class Solution
+{
+public:
+    void solve(int n, vector<vector<string>> &ans, vector<string> &v, int curr_col, vector<int> &upperdiagonal,
+               vector<int> &lowerdiagonal, vector<int> &leftrow)
+    {
+        if (curr_col == n)
+        {
+            ans.push_back(v);
+            return;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            if (lowerdiagonal[i + curr_col] == 0 &&
+                upperdiagonal[n - 1 + curr_col - i] == 0 && leftrow[i] == 0)
+            {
+                v[i][curr_col] = 'Q';
+                lowerdiagonal[i + curr_col] = 1;
+                upperdiagonal[n - 1 + curr_col - i] = 1;
+                leftrow[i] = 1;
+                solve(n, ans, v, curr_col + 1, upperdiagonal, lowerdiagonal, leftrow);
+                lowerdiagonal[i + curr_col] = 0;
+                upperdiagonal[n - 1 + curr_col - i] = 0;
+                leftrow[i] = 0;
+                v[i][curr_col] = '.';
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n)
+    {
+        vector<vector<string>> ans;
+        vector<string> v(n);
+        vector<int> upperdiagonal(2 * n - 1, 0);
+        vector<int> lowerdiagonal(2 * n - 1, 0);
+        vector<int> leftrow(n, 0);
+        string s(n, '.');
+        for (int i = 0; i < n; i++)
+            v[i] = s;
+        int curr_col = 0;
+        solve(n, ans, v, curr_col, upperdiagonal, lowerdiagonal, leftrow);
+        return ans;
+    }
+};
+// TC - O(n!)  SC - O(n^2)
