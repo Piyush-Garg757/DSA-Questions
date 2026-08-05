@@ -64,3 +64,147 @@ public:
 // TC - O(n)  SC - O(h)
 
 // Most Optimal sol
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution
+{
+public:
+    TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+    {
+        if (!root || root == p || root == q)
+            return root;
+        TreeNode *left = lowestCommonAncestor(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor(root->right, p, q);
+        if (left == nullptr)
+            return right;
+        else if (right == nullptr)
+            return left;
+        return root;
+    }
+};
+// TC - O(n)  SC - O(n)
+/*Ye solution samajhne ka sabse important point hai ki recursive function har subtree se ek information return kar raha hai:
+
+"Kya mujhe is subtree me p, q, ya unka LCA mila?"
+
+Isi idea par pura solution based hai.
+
+Step 1: Base Case
+if (!root || root == p || root == q)
+    return root;
+
+Teen cases hain:
+
+Case 1: root == nullptr
+return nullptr;
+
+Matlab is subtree me kuch nahi mila.
+
+Case 2: root == p
+    p
+
+Agar current node hi p hai, to p ko return kar do.
+
+Similarly agar current node q hai, to q return karo.
+
+Iska matlab:
+
+"Maine apne subtree me ek target find kar liya."
+
+Step 2: Left aur Right subtree check karo
+TreeNode* left = lowestCommonAncestor(root->left, p, q);
+TreeNode* right = lowestCommonAncestor(root->right, p, q);
+
+Ab dono subtrees bataenge unhe kya mila.
+
+Possible returns:
+
+nullptr
+p
+q
+LCA
+Case 1: Dono side null
+      A
+     / \
+   null null
+left = nullptr
+right = nullptr
+
+Code:
+
+if(left == nullptr)
+    return right;
+
+Right bhi nullptr hai.
+
+return nullptr;
+
+Matlab is subtree me na p mila na q.
+
+Case 2: Left me p mila
+      A
+     /
+    p
+
+Recursive calls:
+
+left = p
+right = nullptr
+
+Code:
+
+if(right == nullptr)
+    return left;
+
+Return:
+
+p
+
+Matlab:
+
+"Mujhe mere subtree me p mila."
+
+Case 3: Right me q mila
+      A
+       \
+        q
+
+Returns:
+
+left = nullptr
+right = q
+
+Code:
+
+if(left == nullptr)
+    return right;
+
+Return:
+
+q
+Case 4: Ek left me aur ek right me
+        A
+       / \
+      p   q
+
+Returns:
+
+left = p
+right = q
+
+Ab dono non-null hain.
+
+Code:
+
+return root;
+
+Matlab
+
+LCA = A*/
