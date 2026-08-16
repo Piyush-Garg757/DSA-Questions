@@ -25,7 +25,6 @@ bSTIterator.hasNext(); // return True
 bSTIterator.next();    // return 20
 bSTIterator.hasNext(); // return False*/
 
-
 // My first approach
 /**
  * Definition for a binary tree node.
@@ -99,4 +98,202 @@ public:
  */
 // TC - O(n^2)  SC - O(1)
 
+// Optimal answer
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
+ * };
+ */
+class BSTIterator
+{
+    stack<TreeNode *> st;
 
+public:
+    void push_all(stack<TreeNode *> &st, TreeNode *root)
+    {
+        if (!root)
+            return;
+        while (root)
+        {
+            st.push(root);
+            root = root->left;
+        }
+    }
+
+    BSTIterator(TreeNode *root) { push_all(st, root); }
+
+    int next()
+    {
+        TreeNode *node = st.top();
+        st.pop();
+        push_all(st, node->right);
+        return node->val;
+    }
+
+    bool hasNext() { return !st.empty(); }
+};
+
+/**
+ * Your BSTIterator object will be instantiated and called as such:
+ * BSTIterator* obj = new BSTIterator(root);
+ * int param_1 = obj->next();
+ * bool param_2 = obj->hasNext();
+ */
+// TC - O(h)  SC ~ O(1)
+/*The intuition is basically: we want to simulate inorder traversal, but we don't want to traverse the entire tree at once.
+
+For a BST, inorder traversal gives:
+
+Left → Root → Right
+
+and therefore gives elements in sorted order.
+
+1. What would normal inorder traversal do?
+
+For this tree:
+
+        7
+       / \
+      3   15
+         /  \
+        9    20
+
+Normal inorder:
+
+3 → 7 → 9 → 15 → 20
+
+But BSTIterator doesn't want to calculate and store this entire array beforehand.
+
+Instead, it should behave like:
+
+next() → 3
+next() → 7
+next() → 9
+next() → 15
+next() → 20
+
+So we need to pause the inorder traversal after every element.
+
+2. What does the stack represent?
+
+Think of the stack as:
+
+"Nodes that I have reached, but haven't processed yet."
+
+Initially, we go as far left as possible:
+
+        7
+       / \
+      3   15
+
+We push:
+
+7
+3 ← top
+
+Why?
+
+Because in inorder, 3 has to come before 7.
+
+So the top of the stack is always the next node that should be returned.
+
+3. Why do we push the entire left chain?
+
+This function:
+
+void push_all(TreeNode* root) {
+    while (root) {
+        st.push(root);
+        root = root->left;
+    }
+}
+
+is basically saying:
+
+"Before processing this node, first prepare all the nodes that come before it."
+
+For the root:
+
+7 → 3
+
+we push:
+
+7
+3
+
+Now 3 is on top, so:
+
+next()
+
+returns 3.
+
+4. What happens after returning 3?
+
+We pop 3.
+
+stack:
+
+
+7 ← top
+
+3 has no right child, so there's nothing else to prepare.
+
+Next call:
+
+next()
+
+returns 7.
+
+Now here's the important part.
+
+7 has a right subtree:
+
+      7
+       \
+        15
+       /  \
+      9    20
+
+After processing 7, inorder says:
+
+"Now go to the right subtree, but first go as far left as possible."
+
+So we call:
+
+push_all(7->right);
+
+which pushes:
+
+15
+9
+
+Stack becomes:
+
+15
+9 ← top
+
+Therefore next element is 9.
+
+5. The key intuition
+
+The entire algorithm is basically this:
+
+Go left as much as possible
+        ↓
+Top of stack = next smallest element
+        ↓
+Pop it
+        ↓
+If it has a right subtree,
+go left as much as possible there
+        ↓
+Repeat
+
+So you can think of the stack as a paused inorder traversal.*/
