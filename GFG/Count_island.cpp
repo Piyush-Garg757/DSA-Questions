@@ -69,3 +69,43 @@ public:
 };
 // TC - O(n^2)  SC - O(n^2)
 // Simple intution - bfs karo jo bhi L dikhe us node se aur bfs apne saath vale saare visited kar dega uske baad hi khatam hoga to uske baad jab dobra koi L mile yani ye dusra island hai  fir bfs karo aur ans++    aise hi dfs se bhi kar sakte hain
+
+// Using dfs
+class Solution
+{
+public:
+    void dfs(int row, int col, vector<vector<char>> &a, vector<vector<int>> &visited)
+    {
+        visited[row][col] = 1;
+        int n = a.size(), m = a[0].size();
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                int delrow = row + i, delcol = col + j;
+                if (delrow >= 0 && delrow < n && delcol >= 0 && delcol < m && !visited[delrow][delcol] && a[delrow][delcol] == 'L')
+                {
+                    dfs(delrow, delcol, a, visited);
+                }
+            }
+        }
+    }
+    int countIslands(vector<vector<char>> &a)
+    {
+        // Code here
+        int n = a.size(), m = a[0].size(), ans = 0;
+        vector<vector<int>> visited(n, vector<int>(m));
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (!visited[i][j] && a[i][j] == 'L')
+                {
+                    dfs(i, j, a, visited);
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
