@@ -1,0 +1,37 @@
+/*Smallest Missing Multiple of K
+
+Given an integer array nums and an integer k, return the smallest positive multiple of k that is missing from nums.
+A multiple of k is any positive integer divisible by k.
+
+Example 1:
+Input: nums = [8,2,3,4,6], k = 2
+Output: 10
+Explanation:
+The multiples of k = 2 are 2, 4, 6, 8, 10, 12... and the smallest multiple missing from nums is 10.
+
+Example 2:
+Input: nums = [1,4,7,10,15], k = 5
+Output: 5
+Explanation:
+The multiples of k = 5 are 5, 10, 15, 20... and the smallest multiple missing from nums is 5.*/
+
+class Solution
+{
+public:
+    int missingMultiple(vector<int> &a, int k)
+    {
+        sort(a.begin(), a.end());
+        int n = a.size();
+        int m = 1;
+        for (int i = 0; i < n; i++)
+        {
+            if (a[i] == k * m)
+                m++;
+            else if (a[i] < m * k)
+                continue;
+            else
+                break;
+        }
+        return m * k;
+    }
+};  
