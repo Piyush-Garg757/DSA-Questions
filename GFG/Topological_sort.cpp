@@ -18,6 +18,8 @@ Explanation: The output true denotes that the order is valid. Few valid Topologi
 [4, 5, 0, 1, 2, 3]
 [5, 2, 4, 0, 1, 3]*/
 
+
+// Bas DAG - Directed Acyclic Graph ke liye hota hai ye
 class Solution
 {
 public:
