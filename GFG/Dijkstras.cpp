@@ -23,7 +23,6 @@ For 0 to 2 minimum distance will be 8. By following path 0 -> 2
 For 0 to 3 minimum distance will be 10. By following path 0 -> 2 -> 3
 For 0 to 4 minimum distance will be 10. By following path 0 -> 1 -> 4*/
 
-
 // First sol is using priority queue  and it will not work for negative weight cycles because usmein har baar weight kam hota jayega aur chota path milta jayega aur infinite loop ban jayega
 // priority_queue< TYPE, CONTAINER, COMPARATOR > pq;
 /*1. Normal priority_queue kya hota hai?
@@ -81,3 +80,59 @@ public:
     }
 };
 // TC - O((e+v)logv)  SC - O(e+v)
+
+// Using set
+class Solution
+{
+public:
+    vector<int> dijkstra(int v, vector<vector<int>> &a, int src)
+    {
+        // Code here
+        set<pair<int, int>> st;
+        vector<pair<int, int>> adj[v];
+        for (int i = 0; i < a.size(); i++)
+        {
+            int u = a[i][0];
+            int v = a[i][1];
+            int d = a[i][2];
+            adj[u].push_back({v, d});
+            adj[v].push_back({u, d});
+        }
+        vector<int> dist(v, INT_MAX);
+        dist[src] = 0;
+        st.insert({0, src});
+        while (!st.empty())
+        {
+            int d = st.begin()->first;
+            int node = st.begin()->second;
+            st.erase({d, node});
+            for (auto i : adj[node])
+            {
+                int n = i.first;
+                int w = i.second;
+                if (d + w < dist[n])
+                {
+                    if (dist[n] != INT_MAX)
+                        st.erase({dist[n], n});
+                    dist[n] = d + w;
+                    st.insert({dist[n], n});
+                }
+            }
+        }
+        return dist;
+    }
+};
+// TC - O((e+v)logv)  SC - O(e+v)
+/*Why set is useful
+Suppose:
+node 5 has distance 10
+Set:
+{10, 5}
+Later we find distance 6.
+With set, we can do:
+st.erase({10, 5});
+st.insert({6, 5});
+So only the latest distance remains.
+This is conceptually similar to a decrease-key operation.*/
+
+// Priority queue version is generally faster
