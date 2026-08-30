@@ -136,3 +136,4 @@ So only the latest distance remains.
 This is conceptually similar to a decrease-key operation.*/
 
 // Priority queue version is generally faster
+// WE can get anwer using normal queue too but that would take a ot of time because it is not tking in distance on each iteration
